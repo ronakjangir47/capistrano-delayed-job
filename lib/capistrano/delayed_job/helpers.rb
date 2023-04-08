@@ -19,7 +19,7 @@ module Capistrano
       def dj_template(template_name)
         config_file = "#{fetch(:templates_path)}/#{template_name}"
         # if no customized file, proceed with default
-        unless File.exists?(config_file)
+        unless File.exist?(config_file)
           config_file = File.join(File.dirname(__FILE__), "../../generators/capistrano/delayed_job/templates/#{template_name}")
         end
         StringIO.new(ERB.new(File.read(config_file)).result(binding))
@@ -47,7 +47,7 @@ module Capistrano
 
       private
       def relative_bin_path
-        bin_path = %w{bin script}.find { |dir_name| Dir.exists?(dir_name) }
+        bin_path = %w{bin script}.find { |dir_name| Dir.exist?(dir_name) }
         raise "No bin or script dir found in project" if bin_path.nil?
         bin_path
       end
